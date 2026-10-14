@@ -71,15 +71,17 @@ builder.Services
             return Task.CompletedTask;
         };
     });
-builder.Services.AddAuthorization(options => options.FallbackPolicy = options.DefaultPolicy);
+// Без FallbackPolicy: авторизация только на контроллерах с [Authorize].
+// Swagger /swagger и /swagger/v1/swagger.json остаются анонимными.
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 app.Logger.LogInformation(
-    "SQL target: {DataSource}; database: {Database}; integrated security: {IntegratedSecurity}",
+    "SQL target: {DataSource}; database: {Database}; user: {User}",
     sqlConnection.DataSource,
     sqlConnection.InitialCatalog,
-    sqlConnection.IntegratedSecurity);
+    sqlConnection.UserID);
 
 app.Use(async (context, next) =>
 {
