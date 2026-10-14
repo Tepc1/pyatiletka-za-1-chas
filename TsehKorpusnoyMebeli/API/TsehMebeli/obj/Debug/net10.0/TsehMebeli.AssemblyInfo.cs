@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TsehMebeli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0428880fd5fcbb4eef97f9ef788f613e8397fd1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6309cdc88bd408828c2c74c872963157aa06782d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TsehMebeli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TsehMebeli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

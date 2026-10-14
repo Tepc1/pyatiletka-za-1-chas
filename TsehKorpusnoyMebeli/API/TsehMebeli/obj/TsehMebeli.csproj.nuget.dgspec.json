@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Desktop\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {}
+    "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {}
   },
   "projects": {
-    "d:\\Desktop\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {
+    "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Desktop\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
+        "projectUniqueName": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
         "projectName": "TsehMebeli",
-        "projectPath": "d:\\Desktop\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
-        "packagesPath": "C:\\Users\\student\\.nuget\\packages\\",
-        "outputPath": "d:\\Desktop\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\obj\\",
+        "projectPath": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
+        "packagesPath": "C:\\Users\\charka\\.nuget\\packages\\",
+        "outputPath": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\student\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\charka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
