@@ -27,7 +27,7 @@ internal sealed class ApiCustomer
     public int Id { get; set; }
     public string? Code { get; set; }
     public string Name { get; set; } = "";
-    public string? INN { get; set; }
+    public string? Inn { get; set; }
     public string? Address { get; set; }
     public string? Phone { get; set; }
     public bool IsBuyer { get; set; }
@@ -37,7 +37,7 @@ internal sealed class ApiCustomer
 internal sealed class ApiCustomerRequest
 {
     public string Name { get; set; } = "";
-    public string? INN { get; set; }
+    public string? Inn { get; set; }
     public string? Address { get; set; }
     public string? Phone { get; set; }
     public bool IsBuyer { get; set; }
@@ -52,7 +52,7 @@ internal sealed class ApiOrderCost
 
 internal sealed class ApiOrderSummary
 {
-    public int Id { get; set; }
+    public int OrderId { get; set; }
     public string CustomerName { get; set; } = "";
     public DateTime OrderDate { get; set; }
     public decimal TotalCost { get; set; }
