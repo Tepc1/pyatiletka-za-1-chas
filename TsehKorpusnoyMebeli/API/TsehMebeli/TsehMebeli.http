@@ -1,0 +1,19 @@
+@TsehMebeli_HostAddress = https://localhost:7150
+
+### Login
+POST {{TsehMebeli_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "Admin123"
+}
+
+### Customers
+GET {{TsehMebeli_HostAddress}}/api/customers
+
+### Orders
+GET {{TsehMebeli_HostAddress}}/api/orders
+
+### Analysis
+GET {{TsehMebeli_HostAddress}}/api/analysis
