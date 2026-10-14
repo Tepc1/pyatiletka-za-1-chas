@@ -25,7 +25,6 @@ internal sealed class MainForm : Form
         Size = new Size(1020, 680);
         UiTheme.ApplyForm(this);
 
-        // —— верхняя панель навигации ——
         var topBar = new Panel { Dock = DockStyle.Top, Height = 56, BackColor = UiTheme.Header, Padding = new Padding(8, 10, 8, 10) };
 
         btnBack = UiTheme.CreateNavButton("◀");
@@ -71,7 +70,6 @@ internal sealed class MainForm : Form
         topBar.Controls.Add(userBadge);
         topBar.Controls.Add(btnLogout);
 
-        // —— боковое меню ——
         var side = new Panel { Dock = DockStyle.Left, Width = 220, BackColor = UiTheme.Sidebar };
         side.Paint += (s, e) =>
         {
@@ -207,6 +205,26 @@ internal sealed class MainForm : Form
         }
         if (CanViewAnalysis(user.Role))
             AddHomeCard(flow, "Анализ заказов", "Сводка по клиентам, изделиям и скидкам", "analysis");
+
+        var sqlBtn = UiTheme.CreateSecondaryButton("Проверить SQL", 160, 36);
+        sqlBtn.Margin = new Padding(4, 16, 4, 4);
+        sqlBtn.Click += async (_, _) =>
+        {
+            sqlBtn.Enabled = false;
+            sqlBtn.Text = "…";
+            try
+            {
+                var (ok, message) = await SqlConnectionFactory.TestAsync();
+                MessageBox.Show(message, ok ? "SQL OK" : "Ошибка SQL",
+                    MessageBoxButtons.OK, ok ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+            }
+            finally
+            {
+                sqlBtn.Enabled = true;
+                sqlBtn.Text = "Проверить SQL";
+            }
+        };
+        flow.Controls.Add(sqlBtn);
 
         panel.Controls.Add(flow);
         return panel;
