@@ -2,46 +2,59 @@
 
 Информационная система **Цех корпусной мебели**.
 
-## Visual Studio 2026
+## Visual Studio 2026 — открыть solution
 
-Откройте единый solution:
+Основной файл solution (формат **.slnx**):
 
 ```
-TsehKorpusnoyMebeli/TsehKorpusnoyMebeli.sln
+TsehKorpusnoyMebeli/TsehMebeli.slnx
 ```
 
-В solution два проекта:
+| Проект | Путь | Назначение |
+|--------|------|------------|
+| API | `API/TsehMebeli/TsehMebeli.csproj` | ASP.NET Core Web API + Swagger |
+| Client | `Client/TsehMebeli/TsehMebeli.csproj` | WinForms (.NET 10) |
 
-| Проект | Платформа | Описание |
-|--------|-----------|----------|
-| **TsehMebeli.Api** | .NET 10 | ASP.NET Core Web API + Swagger |
-| **TsehMebeli.Client** | .NET 10 Windows | WinForms-клиент |
+> **Важно:** файл `.csproj` — это описание проекта (пакеты, target framework).  
+> Файл `.slnx` — это solution (список проектов). Оба нужны: без `.csproj` проект не соберётся.
 
-1. Установите startup project: **TsehMebeli.Api** (или запускайте оба).
-2. В `API/TsehMebeli/appsettings.json` — строка к `209-U\SQLEXPRESS01` (sa / 0000).
-3. F5 по API → https://localhost:7150/swagger
-4. Запустите **TsehMebeli.Client** (правой кнопкой → Debug).
+Можно также открыть solution только API или только Client:
+- `API/TsehMebeli/TsehMebeli.slnx`
+- `Client/TsehMebeli/TsehMebeli.slnx`
 
-## SQL
+## SQL Server
 
-По порядку:
+Строка подключения (API и Client):
+
+```
+Data Source=209-U\SQLEXPRESS01;
+Initial Catalog=TsehMebeliDB;
+User ID=sa;
+Password=0000;
+Encrypt=True; TrustServerCertificate=True;
+```
+
+- API: `API/TsehMebeli/appsettings.json` → `ConnectionStrings:TsehMebeli`
+- Client: `Client/TsehMebeli/App.config` → `connectionStrings/TsehMebeli`  
+  + класс `Services/SqlConnectionFactory.cs` для прямого доступа к БД
+
+## SQL-скрипты
 
 1. `SQL/TsehMebeliDB.sql`
 2. `SQL/TsehMebeliDB_seed.sql`
 3. `SQL/TsehMebeliDB_seed2.sql`
 4. `SQL/TsehMebeliDB_seed3.sql`
 
-## Учётные записи
+## Запуск
+
+1. Выполнить SQL-скрипты в SSMS
+2. Запустить API (F5) → https://localhost:7150/swagger
+3. Запустить Client
+
+## Учётки
 
 | Логин | Пароль | Роль |
 |-------|--------|------|
 | admin | Admin123 | Admin |
 | manager | Manager123 | Manager |
 | operator | Operator123 | Operator |
-
-## Клиент: навигация
-
-- **◀ / ▶** — назад / вперёд по истории экранов
-- **⌂** — главное меню
-- Боковое меню: Клиенты, Заказы, Расчёт, Анализ
-- **Выход** — завершение сессии API
