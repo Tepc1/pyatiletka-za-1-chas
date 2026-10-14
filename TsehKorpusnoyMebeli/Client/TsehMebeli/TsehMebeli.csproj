@@ -47,6 +47,7 @@
     <Compile Include="Services\ApiClient.cs" />
     <Compile Include="Utils\ConfigManager.cs" />
     <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\UiTheme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

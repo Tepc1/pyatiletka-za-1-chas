@@ -22,18 +22,36 @@ namespace TsehMebeli.Forms
         {
             Text = "Справочник клиентов";
             StartPosition = FormStartPosition.CenterParent;
-            Size = new Size(900, 500);
-            var panel = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8) };
-            var btnRefresh = new Button { Text = "Обновить", Width = 100 };
+            Size = new Size(960, 560);
+            UiTheme.ApplyForm(this);
+            UiTheme.StyleGrid(grid);
+
+            Controls.Add(UiTheme.CreateHeader("Справочник клиентов", "Управление контрагентами цеха"));
+
+            var panel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                Height = 56,
+                Padding = new Padding(16, 10, 16, 10),
+                BackColor = UiTheme.Background,
+                FlowDirection = FlowDirection.LeftToRight
+            };
+
+            var btnRefresh = UiTheme.CreateSecondaryButton("Обновить");
             btnRefresh.Click += async (s, e) => await LoadData();
-            var btnAdd = new Button { Text = "Добавить", Width = 100 };
+            var btnAdd = UiTheme.CreatePrimaryButton("Добавить", 130, 36);
             btnAdd.Click += async (s, e) => await AddCustomer();
-            var btnEdit = new Button { Text = "Изменить", Width = 100 };
+            var btnEdit = UiTheme.CreateSecondaryButton("Изменить");
             btnEdit.Click += async (s, e) => await EditCustomer();
-            var btnDelete = new Button { Text = "Удалить", Width = 100 };
+            var btnDelete = UiTheme.CreateDangerButton("Удалить");
             btnDelete.Click += async (s, e) => await DeleteCustomer();
+
             panel.Controls.AddRange(new Control[] { btnRefresh, btnAdd, btnEdit, btnDelete });
-            Controls.Add(grid);
+
+            var gridHost = new Panel { Dock = DockStyle.Fill, Padding = new Padding(16, 0, 16, 16), BackColor = UiTheme.Background };
+            gridHost.Controls.Add(grid);
+
+            Controls.Add(gridHost);
             Controls.Add(panel);
             Load += async (s, e) => await LoadData();
         }
@@ -96,7 +114,8 @@ namespace TsehMebeli.Forms
             if (grid.CurrentRow == null) return;
             var row = grid.CurrentRow.DataBoundItem as ApiCustomer;
             if (row == null) return;
-            if (MessageBox.Show("Удалить клиента «" + row.Name + "»?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show("Удалить клиента «" + row.Name + "»?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
             try
             {
@@ -117,8 +136,8 @@ namespace TsehMebeli.Forms
         private readonly TextBox inn = new TextBox();
         private readonly TextBox address = new TextBox();
         private readonly TextBox phone = new TextBox();
-        private readonly CheckBox isBuyer = new CheckBox { Text = "Покупатель", Checked = true };
-        private readonly CheckBox isSalesman = new CheckBox { Text = "Поставщик" };
+        private readonly CheckBox isBuyer = new CheckBox { Text = "Покупатель", Checked = true, AutoSize = true };
+        private readonly CheckBox isSalesman = new CheckBox { Text = "Поставщик", AutoSize = true };
 
         public ApiCustomerRequest Request { get; private set; }
 
@@ -128,21 +147,42 @@ namespace TsehMebeli.Forms
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
             MaximizeBox = false;
-            ClientSize = new Size(420, 260);
-            var layout = new TableLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(12), ColumnCount = 2, RowCount = 7 };
+            MinimizeBox = false;
+            ClientSize = new Size(460, 340);
+            UiTheme.ApplyForm(this);
+
+            Controls.Add(UiTheme.CreateHeader(existing == null ? "Новый клиент" : "Редактирование", "Карточка контрагента"));
+
+            var layout = new TableLayoutPanel
+            {
+                Location = new Point(24, 90),
+                Size = new Size(410, 230),
+                ColumnCount = 2,
+                RowCount = 7,
+                BackColor = UiTheme.Background
+            };
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100));
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            layout.Controls.Add(new Label { Text = "Название", AutoSize = true }, 0, 0);
+
+            UiTheme.StyleTextBox(name);
+            UiTheme.StyleTextBox(inn);
+            UiTheme.StyleTextBox(address);
+            UiTheme.StyleTextBox(phone);
+            name.Width = inn.Width = address.Width = phone.Width = 280;
+
+            layout.Controls.Add(new Label { Text = "Название", AutoSize = true, ForeColor = UiTheme.TextMuted }, 0, 0);
             layout.Controls.Add(name, 1, 0);
-            layout.Controls.Add(new Label { Text = "ИНН", AutoSize = true }, 0, 1);
+            layout.Controls.Add(new Label { Text = "ИНН", AutoSize = true, ForeColor = UiTheme.TextMuted }, 0, 1);
             layout.Controls.Add(inn, 1, 1);
-            layout.Controls.Add(new Label { Text = "Адрес", AutoSize = true }, 0, 2);
+            layout.Controls.Add(new Label { Text = "Адрес", AutoSize = true, ForeColor = UiTheme.TextMuted }, 0, 2);
             layout.Controls.Add(address, 1, 2);
-            layout.Controls.Add(new Label { Text = "Телефон", AutoSize = true }, 0, 3);
+            layout.Controls.Add(new Label { Text = "Телефон", AutoSize = true, ForeColor = UiTheme.TextMuted }, 0, 3);
             layout.Controls.Add(phone, 1, 3);
             layout.Controls.Add(isBuyer, 1, 4);
             layout.Controls.Add(isSalesman, 1, 5);
-            var ok = new Button { Text = "OK", DialogResult = DialogResult.OK };
+
+            var ok = UiTheme.CreatePrimaryButton("Сохранить", 120, 36);
+            ok.DialogResult = DialogResult.OK;
             ok.Click += (s, e) =>
             {
                 if (string.IsNullOrWhiteSpace(name.Text))
@@ -161,11 +201,14 @@ namespace TsehMebeli.Forms
                     IsSalesman = isSalesman.Checked
                 };
             };
-            var cancel = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel };
-            var buttons = new FlowLayoutPanel { FlowDirection = FlowDirection.RightToLeft };
+            var cancel = UiTheme.CreateSecondaryButton("Отмена");
+            cancel.DialogResult = DialogResult.Cancel;
+
+            var buttons = new FlowLayoutPanel { FlowDirection = FlowDirection.RightToLeft, Dock = DockStyle.Fill };
             buttons.Controls.Add(ok);
             buttons.Controls.Add(cancel);
             layout.Controls.Add(buttons, 1, 6);
+
             Controls.Add(layout);
             AcceptButton = ok;
             CancelButton = cancel;

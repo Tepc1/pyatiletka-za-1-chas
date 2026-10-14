@@ -12,28 +12,54 @@ namespace TsehMebeli.Forms
     {
         private readonly TextBox login = new TextBox();
         private readonly TextBox password = new TextBox();
+        private readonly Button button;
 
         public LoginForm()
         {
             Text = "Цех корпусной мебели — вход";
             StartPosition = FormStartPosition.CenterScreen;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            ClientSize = new Size(380, 190);
-            var layout = new TableLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(16), ColumnCount = 2, RowCount = 4 };
-            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 110));
-            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            layout.Controls.Add(new Label { Text = "Логин", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 0);
-            layout.Controls.Add(login, 1, 0);
-            layout.Controls.Add(new Label { Text = "Пароль", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 1);
+            MinimizeBox = true;
+            ClientSize = new Size(440, 360);
+            UiTheme.ApplyForm(this);
+
+            Controls.Add(UiTheme.CreateHeader("Цех корпусной мебели", "Информационная система · вход в учётную запись"));
+
+            var card = new Panel
+            {
+                BackColor = UiTheme.Surface,
+                Location = new Point(40, 110),
+                Size = new Size(360, 220),
+                Padding = new Padding(24)
+            };
+            // лёгкая «карточка»
+            card.Paint += (s, e) =>
+            {
+                using (var pen = new Pen(UiTheme.Border))
+                    e.Graphics.DrawRectangle(pen, 0, 0, card.Width - 1, card.Height - 1);
+            };
+
+            var lblLogin = new Label { Text = "Логин", Location = new Point(24, 20), AutoSize = true, ForeColor = UiTheme.TextMuted };
+            login.Location = new Point(24, 42);
+            login.Width = 310;
+            UiTheme.StyleTextBox(login);
+
+            var lblPass = new Label { Text = "Пароль", Location = new Point(24, 80), AutoSize = true, ForeColor = UiTheme.TextMuted };
+            password.Location = new Point(24, 102);
+            password.Width = 310;
             password.UseSystemPasswordChar = true;
-            layout.Controls.Add(password, 1, 1);
-            var button = new Button { Text = "Войти", AutoSize = true, Anchor = AnchorStyles.Right };
+            UiTheme.StyleTextBox(password);
+
+            button = UiTheme.CreatePrimaryButton("Войти", 310, 42);
+            button.Location = new Point(24, 148);
             button.Click += SignIn;
-            layout.Controls.Add(button, 1, 2);
-            layout.Controls.Add(new Label { Text = "admin / Admin123", AutoSize = true, ForeColor = Color.DimGray }, 0, 3);
-            layout.SetColumnSpan(layout.GetControlFromPosition(0, 3), 2);
-            Controls.Add(layout);
+
+            var hint = UiTheme.CreateMutedLabel("Учётка для проверки: admin / Admin123");
+            hint.Location = new Point(24, 198);
+
+            card.Controls.AddRange(new Control[] { lblLogin, login, lblPass, password, button, hint });
+            Controls.Add(card);
             AcceptButton = button;
         }
 
@@ -44,6 +70,8 @@ namespace TsehMebeli.Forms
                 MessageBox.Show("Введите логин и пароль.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            button.Enabled = false;
+            button.Text = "Вход…";
             try
             {
                 var enteredLogin = login.Text;
@@ -66,6 +94,11 @@ namespace TsehMebeli.Forms
                     ? exception.Message
                     : "Не удалось выполнить вход. Подробности записаны в журнал приложения.";
                 MessageBox.Show(message, "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                button.Enabled = true;
+                button.Text = "Войти";
             }
         }
     }

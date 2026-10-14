@@ -23,12 +23,27 @@ namespace TsehMebeli.Forms
             this.role = role;
             Text = "Анализ заказов клиентов";
             StartPosition = FormStartPosition.CenterParent;
-            Size = new Size(1000, 550);
-            var panel = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 48, Padding = new Padding(8) };
-            var btnRefresh = new Button { Text = "Обновить", Width = 100 };
+            Size = new Size(1080, 600);
+            UiTheme.ApplyForm(this);
+            UiTheme.StyleGrid(grid);
+
+            Controls.Add(UiTheme.CreateHeader("Анализ заказов", "Сводка по клиентам, изделиям и скидкам"));
+
+            var panel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                Height = 56,
+                Padding = new Padding(16, 10, 16, 10),
+                BackColor = UiTheme.Background
+            };
+            var btnRefresh = UiTheme.CreatePrimaryButton("Обновить", 130, 36);
             btnRefresh.Click += async (s, e) => await LoadData();
             panel.Controls.Add(btnRefresh);
-            Controls.Add(grid);
+
+            var gridHost = new Panel { Dock = DockStyle.Fill, Padding = new Padding(16, 0, 16, 16), BackColor = UiTheme.Background };
+            gridHost.Controls.Add(grid);
+
+            Controls.Add(gridHost);
             Controls.Add(panel);
             Load += async (s, e) => await LoadData();
         }
