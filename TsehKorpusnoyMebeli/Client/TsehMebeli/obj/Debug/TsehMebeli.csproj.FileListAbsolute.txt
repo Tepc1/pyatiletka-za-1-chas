@@ -1,0 +1,7 @@
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\bin\Debug\TsehMebeli.exe.config
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\bin\Debug\TsehMebeli.exe
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\bin\Debug\TsehMebeli.pdb
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\obj\Debug\TsehMebeli.csproj.AssemblyReference.cache
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\obj\Debug\TsehMebeli.csproj.CoreCompileInputs.cache
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\obj\Debug\TsehMebeli.exe
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\Client\TsehMebeli\obj\Debug\TsehMebeli.pdb
