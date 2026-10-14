@@ -2,41 +2,36 @@
 
 Информационная система **Цех корпусной мебели**.
 
-## Visual Studio 2026 — открыть solution
+## Visual Studio 2026
 
-Основной файл solution (формат **.slnx**):
+Откройте:
 
 ```
 TsehKorpusnoyMebeli/TsehMebeli.slnx
 ```
 
-| Проект | Путь | Назначение |
-|--------|------|------------|
-| API | `API/TsehMebeli/TsehMebeli.csproj` | ASP.NET Core Web API + Swagger |
-| Client | `Client/TsehMebeli/TsehMebeli.csproj` | WinForms (.NET 10) |
-
-> **Важно:** файл `.csproj` — это описание проекта (пакеты, target framework).  
-> Файл `.slnx` — это solution (список проектов). Оба нужны: без `.csproj` проект не соберётся.
-
-Можно также открыть solution только API или только Client:
-- `API/TsehMebeli/TsehMebeli.slnx`
-- `Client/TsehMebeli/TsehMebeli.slnx`
+| Проект | Путь |
+|--------|------|
+| API | `API/TsehMebeli/TsehMebeli.csproj` |
+| Client | `Client/TsehMebeli/TsehMebeli.csproj` |
 
 ## SQL Server
 
-Строка подключения (API и Client):
+**Сервер:** `HOME-PC`  
+**БД:** `TsehMebeliDB`  
+**Авторизация:** Windows (Integrated Security), без логина/пароля
 
 ```
-Data Source=209-U\SQLEXPRESS01;
+Data Source=HOME-PC;
 Initial Catalog=TsehMebeliDB;
-User ID=sa;
-Password=0000;
+Integrated Security=True;
 Encrypt=True; TrustServerCertificate=True;
 ```
 
-- API: `API/TsehMebeli/appsettings.json` → `ConnectionStrings:TsehMebeli`
-- Client: `Client/TsehMebeli/App.config` → `connectionStrings/TsehMebeli`  
-  + класс `Services/SqlConnectionFactory.cs` для прямого доступа к БД
+- API: `API/TsehMebeli/appsettings.json`
+- Client: `Client/TsehMebeli/App.config` + `SqlConnectionFactory`
+
+Учётная запись Windows, под которой запущены API и Client, должна иметь доступ к SQL Server и к БД `TsehMebeliDB`.
 
 ## SQL-скрипты
 
@@ -45,13 +40,7 @@ Encrypt=True; TrustServerCertificate=True;
 3. `SQL/TsehMebeliDB_seed2.sql`
 4. `SQL/TsehMebeliDB_seed3.sql`
 
-## Запуск
-
-1. Выполнить SQL-скрипты в SSMS
-2. Запустить API (F5) → https://localhost:7150/swagger
-3. Запустить Client
-
-## Учётки
+## Учётки приложения
 
 | Логин | Пароль | Роль |
 |-------|--------|------|
