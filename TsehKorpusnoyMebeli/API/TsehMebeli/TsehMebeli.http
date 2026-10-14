@@ -9,11 +9,20 @@ Content-Type: application/json
   "password": "Admin123"
 }
 
+### Logout
+POST {{TsehMebeli_HostAddress}}/api/auth/logout
+
 ### Customers
 GET {{TsehMebeli_HostAddress}}/api/customers
 
 ### Orders
 GET {{TsehMebeli_HostAddress}}/api/orders
 
+### Order cost
+GET {{TsehMebeli_HostAddress}}/api/orders/1/cost
+
 ### Analysis
 GET {{TsehMebeli_HostAddress}}/api/analysis
+
+### Swagger UI
+GET {{TsehMebeli_HostAddress}}/swagger

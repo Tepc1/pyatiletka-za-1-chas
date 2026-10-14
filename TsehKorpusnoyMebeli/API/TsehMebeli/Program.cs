@@ -1,25 +1,63 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using System.Reflection;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Data.SqlClient;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var configuredConnectionString = builder.Configuration.GetConnectionString("TsehMebeli");
 if (string.IsNullOrWhiteSpace(configuredConnectionString))
     throw new InvalidOperationException("ConnectionStrings:TsehMebeli is not configured.");
 var sqlConnection = new SqlConnectionStringBuilder(configuredConnectionString);
+
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
 builder.Services.AddProblemDetails();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Цех корпусной мебели API",
+        Version = "v1",
+        Description = "Web API информационной системы «Цех корпусной мебели» (УП06, вариант 11).\n" +
+                      "Аутентификация: cookie-сессия после POST /api/auth/login.",
+        Contact = new OpenApiContact { Name = "TsehMebeli" }
+    });
+
+    options.AddSecurityDefinition("CookieAuth", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Cookie,
+        Name = ".TsehMebeli.Session",
+        Description = "Cookie-сессия после успешного входа (POST /api/auth/login)."
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "CookieAuth" }
+            },
+            Array.Empty<string>()
+        }
+    });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+        options.IncludeXmlComments(xmlPath);
+});
+
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.Cookie.Name = ".TsehMebeli.Session";
         options.Cookie.HttpOnly = true;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        options.Cookie.SameSite = SameSiteMode.Lax;
         options.ExpireTimeSpan = TimeSpan.FromHours(8);
         options.SlidingExpiration = true;
         options.Events.OnRedirectToLogin = context =>
@@ -36,22 +74,17 @@ builder.Services
 builder.Services.AddAuthorization(options => options.FallbackPolicy = options.DefaultPolicy);
 
 var app = builder.Build();
+
 app.Logger.LogInformation(
-    "SQL target: {DataSource}; database: {Database}; integrated security: {IntegratedSecurity}; encryption: {Encrypt}; trust server certificate: {TrustServerCertificate}; pooling: {Pooling}; MARS: {MultipleActiveResultSets}",
+    "SQL target: {DataSource}; database: {Database}; integrated security: {IntegratedSecurity}",
     sqlConnection.DataSource,
     sqlConnection.InitialCatalog,
-    sqlConnection.IntegratedSecurity,
-    sqlConnection.Encrypt,
-    sqlConnection.TrustServerCertificate,
-    sqlConnection.Pooling,
-    sqlConnection.MultipleActiveResultSets);
+    sqlConnection.IntegratedSecurity);
+
 app.Use(async (context, next) =>
 {
     var stopwatch = Stopwatch.StartNew();
-    try
-    {
-        await next();
-    }
+    try { await next(); }
     finally
     {
         stopwatch.Stop();
@@ -63,20 +96,22 @@ app.Use(async (context, next) =>
             stopwatch.Elapsed.TotalMilliseconds);
     }
 });
-app.UseExceptionHandler();
-app.Use(async (context, next) =>
-{
-    if (!context.Request.IsHttps)
-    {
-        context.Response.StatusCode = StatusCodes.Status400BadRequest;
-        await context.Response.WriteAsJsonAsync(new { error = "HTTPS is required." }, context.RequestAborted);
-        return;
-    }
 
-    await next();
-});
-if (app.Environment.IsDevelopment()) app.MapOpenApi().AllowAnonymous();
+app.UseExceptionHandler();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "TsehMebeli API v1");
+        options.DocumentTitle = "Цех корпусной мебели — Swagger";
+        options.RoutePrefix = "swagger";
+    });
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();
