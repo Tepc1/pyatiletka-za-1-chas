@@ -173,7 +173,7 @@ internal sealed class CustomerEditDialog : Form
             Request = new ApiCustomerRequest
             {
                 Name = name.Text.Trim(),
-                INN = string.IsNullOrWhiteSpace(inn.Text) ? null : inn.Text.Trim(),
+                Inn = string.IsNullOrWhiteSpace(inn.Text) ? null : inn.Text.Trim(),
                 Address = string.IsNullOrWhiteSpace(address.Text) ? null : address.Text.Trim(),
                 Phone = string.IsNullOrWhiteSpace(phone.Text) ? null : phone.Text.Trim(),
                 IsBuyer = isBuyer.Checked,
@@ -197,7 +197,7 @@ internal sealed class CustomerEditDialog : Form
         if (existing is not null)
         {
             name.Text = existing.Name;
-            inn.Text = existing.INN;
+            inn.Text = existing.Inn;
             address.Text = existing.Address;
             phone.Text = existing.Phone;
             isBuyer.Checked = existing.IsBuyer;

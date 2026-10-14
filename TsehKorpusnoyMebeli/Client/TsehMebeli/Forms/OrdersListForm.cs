@@ -3,7 +3,6 @@ using TsehMebeli.Utils;
 
 namespace TsehMebeli.Forms;
 
-/// <summary>Список заказов с суммами.</summary>
 internal sealed class OrdersListForm : Form
 {
     private readonly DataGridView grid = new()
@@ -47,8 +46,7 @@ internal sealed class OrdersListForm : Form
     {
         try
         {
-            var list = await ApiClient.GetOrdersAsync();
-            grid.DataSource = list;
+            grid.DataSource = await ApiClient.GetOrdersAsync();
         }
         catch (Exception ex)
         {
@@ -62,7 +60,7 @@ internal sealed class OrdersListForm : Form
         if (grid.CurrentRow?.DataBoundItem is not ApiOrderSummary row) return;
         try
         {
-            var cost = await ApiClient.CalculateOrderCostAsync(row.Id);
+            var cost = await ApiClient.CalculateOrderCostAsync(row.OrderId);
             MessageBox.Show(
                 $"Заказ №{cost.OrderId}\nКлиент: {row.CustomerName}\nСтоимость: {cost.TotalCost:N2} ₽",
                 "Расчёт стоимости", MessageBoxButtons.OK, MessageBoxIcon.Information);
