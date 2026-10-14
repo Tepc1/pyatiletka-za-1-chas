@@ -1,0 +1,61 @@
+-- УП06, вариант 11 — Цех корпусной мебели
+IF DB_ID(N'TsehMebeliDB') IS NULL
+    CREATE DATABASE TsehMebeliDB;
+GO
+USE TsehMebeliDB;
+GO
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+SET ANSI_PADDING ON;
+SET ANSI_WARNINGS ON;
+SET ARITHABORT ON;
+SET CONCAT_NULL_YIELDS_NULL ON;
+SET NUMERIC_ROUNDABORT OFF;
+GO
+
+IF OBJECT_ID(N'dbo.Customer', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Customer (
+        Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Customer PRIMARY KEY,
+        Code NVARCHAR(20) NULL,
+        Name NVARCHAR(200) NOT NULL,
+        INN VARCHAR(12) NULL,
+        Address NVARCHAR(500) NULL,
+        Phone NVARCHAR(30) NULL,
+        Email NVARCHAR(100) NULL,
+        IsBuyer BIT NOT NULL CONSTRAINT DF_Customer_IsBuyer DEFAULT (0),
+        IsSalesman BIT NOT NULL CONSTRAINT DF_Customer_IsSalesman DEFAULT (0),
+        CreatedAt DATETIME2 NOT NULL CONSTRAINT DF_Customer_CreatedAt DEFAULT (SYSUTCDATETIME()),
+        Note NVARCHAR(500) NULL
+    );
+END;
+IF OBJECT_ID(N'dbo.Product', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Product (
+        Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Product PRIMARY KEY,
+        Code NVARCHAR(20) NULL,
+        Name NVARCHAR(250) NOT NULL,
+        Unit NVARCHAR(20) NOT NULL CONSTRAINT CK_Product_Unit CHECK (Unit IN (N'шт',N'кг',N'л',N'м',N'т',N'мин',N'ч',N'нормочас',N'м2'))
+    );
+END;
+IF OBJECT_ID(N'dbo.Material', N'U') IS NULL
+    CREATE TABLE dbo.Material (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Material PRIMARY KEY, Name NVARCHAR(200) NOT NULL, Unit NVARCHAR(20) NOT NULL, Price DECIMAL(12,2) NOT NULL CONSTRAINT CK_Material_Price CHECK (Price >= 0));
+IF OBJECT_ID(N'dbo.Operation', N'U') IS NULL
+    CREATE TABLE dbo.Operation (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Operation PRIMARY KEY, Name NVARCHAR(200) NOT NULL, Unit NVARCHAR(20) NOT NULL, Price DECIMAL(12,2) NOT NULL CONSTRAINT CK_Operation_Price CHECK (Price >= 0));
+IF OBJECT_ID(N'dbo.Specification', N'U') IS NULL
+    CREATE TABLE dbo.Specification (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Specification PRIMARY KEY, ProductId INT NOT NULL CONSTRAINT UQ_Specification_Product UNIQUE, CONSTRAINT FK_Specification_Product FOREIGN KEY (ProductId) REFERENCES dbo.Product(Id) ON DELETE CASCADE);
+IF OBJECT_ID(N'dbo.SpecMaterial', N'U') IS NULL
+    CREATE TABLE dbo.SpecMaterial (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_SpecMaterial PRIMARY KEY, SpecId INT NOT NULL, MaterialId INT NOT NULL, Norm DECIMAL(10,4) NOT NULL CONSTRAINT CK_SpecMaterial_Norm CHECK (Norm > 0), CONSTRAINT FK_SpecMaterial_Specification FOREIGN KEY (SpecId) REFERENCES dbo.Specification(Id) ON DELETE CASCADE, CONSTRAINT FK_SpecMaterial_Material FOREIGN KEY (MaterialId) REFERENCES dbo.Material(Id), CONSTRAINT UQ_SpecMaterial UNIQUE (SpecId, MaterialId));
+IF OBJECT_ID(N'dbo.SpecOperation', N'U') IS NULL
+    CREATE TABLE dbo.SpecOperation (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_SpecOperation PRIMARY KEY, SpecId INT NOT NULL, OperationId INT NOT NULL, Norm DECIMAL(10,4) NOT NULL CONSTRAINT CK_SpecOperation_Norm CHECK (Norm > 0), CONSTRAINT FK_SpecOperation_Specification FOREIGN KEY (SpecId) REFERENCES dbo.Specification(Id) ON DELETE CASCADE, CONSTRAINT FK_SpecOperation_Operation FOREIGN KEY (OperationId) REFERENCES dbo.Operation(Id), CONSTRAINT UQ_SpecOperation UNIQUE (SpecId, OperationId));
+IF OBJECT_ID(N'dbo.[Order]', N'U') IS NULL
+    CREATE TABLE dbo.[Order] (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Order PRIMARY KEY, CustomerId INT NOT NULL, OrderDate DATE NOT NULL CONSTRAINT DF_Order_OrderDate DEFAULT (CONVERT(date, GETDATE())), TotalAmount DECIMAL(14,2) NOT NULL CONSTRAINT DF_Order_TotalAmount DEFAULT (0), CONSTRAINT CK_Order_TotalAmount CHECK (TotalAmount >= 0), CONSTRAINT FK_Order_Customer FOREIGN KEY (CustomerId) REFERENCES dbo.Customer(Id));
+IF OBJECT_ID(N'dbo.OrderDetail', N'U') IS NULL
+    CREATE TABLE dbo.OrderDetail (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_OrderDetail PRIMARY KEY, OrderId INT NOT NULL, ProductId INT NOT NULL, Quantity DECIMAL(10,2) NOT NULL CONSTRAINT CK_OrderDetail_Quantity CHECK (Quantity > 0), CONSTRAINT FK_OrderDetail_Order FOREIGN KEY (OrderId) REFERENCES dbo.[Order](Id) ON DELETE CASCADE, CONSTRAINT FK_OrderDetail_Product FOREIGN KEY (ProductId) REFERENCES dbo.Product(Id), CONSTRAINT UQ_OrderDetail_OrderProduct UNIQUE (OrderId, ProductId));
+IF OBJECT_ID(N'dbo.[User]', N'U') IS NULL
+    CREATE TABLE dbo.[User] (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_User PRIMARY KEY, Login NVARCHAR(50) NOT NULL CONSTRAINT UQ_User_Login UNIQUE, PasswordHash NVARCHAR(256) NOT NULL, Salt NVARCHAR(64) NOT NULL, Role NVARCHAR(20) NOT NULL CONSTRAINT CK_User_Role CHECK (Role IN (N'Admin',N'Manager',N'Operator')), FullName NVARCHAR(200) NULL);
+IF OBJECT_ID(N'dbo.OrderHistory', N'U') IS NULL
+    CREATE TABLE dbo.OrderHistory (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_OrderHistory PRIMARY KEY, OrderId INT NOT NULL, ChangeDate DATETIME2 NOT NULL CONSTRAINT DF_OrderHistory_ChangeDate DEFAULT (SYSUTCDATETIME()), OldStatus NVARCHAR(50) NULL, NewStatus NVARCHAR(50) NULL, ChangedBy INT NULL, CONSTRAINT FK_OrderHistory_Order FOREIGN KEY (OrderId) REFERENCES dbo.[Order](Id) ON DELETE CASCADE);
+IF OBJECT_ID(N'dbo.CustomerDiscount', N'U') IS NULL
+    CREATE TABLE dbo.CustomerDiscount (Id INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_CustomerDiscount PRIMARY KEY, CustomerId INT NOT NULL, OrderId INT NOT NULL CONSTRAINT UQ_CustomerDiscount_Order UNIQUE, DiscountAmount DECIMAL(12,2) NOT NULL CONSTRAINT CK_CustomerDiscount_Amount CHECK (DiscountAmount >= 0), CONSTRAINT FK_CustomerDiscount_Customer FOREIGN KEY (CustomerId) REFERENCES dbo.Customer(Id), CONSTRAINT FK_CustomerDiscount_Order FOREIGN KEY (OrderId) REFERENCES dbo.[Order](Id));
+GO
