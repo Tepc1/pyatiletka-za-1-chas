@@ -1,0 +1,86 @@
+﻿{
+  "info": {
+    "name": "AutoCenterPlus API",
+    "description": "Authenticated smoke tests for the HTTPS AutoCenterPlus REST API. Log in with an application user; the session cookie is reused for subsequent requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://localhost:7117" },
+    { "key": "apiLogin", "value": "admin" },
+    { "key": "apiPassword", "value": "Admin123" },
+    { "key": "orderId", "value": "1" },
+    { "key": "customerId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Log in",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"login\":\"{{apiLogin}}\",\"password\":\"{{apiPassword}}\"}" },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns authenticated identity without credentials', () => { const body = pm.response.json(); pm.expect(body).to.have.property('role'); pm.expect(body).not.to.have.property('password'); });"] } }]
+    },
+    {
+      "name": "Customers",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/customers" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('body is an array', () => pm.expect(pm.response.json()).to.be.an('array'));", "pm.test('customer has required fields', () => { const body = pm.response.json(); if (body.length) pm.expect(body[0]).to.have.property('name'); });"] } }]
+    },
+    {
+      "name": "Create test customer",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"name\":\"API smoke test {{$guid}}\",\"inn\":null,\"address\":null,\"phone\":null,\"isBuyer\":true,\"isSalesman\":false}" },
+        "url": "{{baseUrl}}/api/customers"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('creates a customer', () => pm.response.to.have.status(201));", "pm.collectionVariables.set('testCustomerId', pm.response.json().id);"] } }]
+    },
+    {
+      "name": "Update test customer",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"name\":\"Updated API smoke test\",\"inn\":null,\"address\":null,\"phone\":null,\"isBuyer\":true,\"isSalesman\":false}" },
+        "url": "{{baseUrl}}/api/customers/{{testCustomerId}}"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('updates the customer', () => pm.response.to.have.status(204));"] } }]
+    },
+    {
+      "name": "Delete test customer",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/customers/{{testCustomerId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('deletes the customer', () => pm.response.to.have.status(204));"] } }]
+    },
+    {
+      "name": "Order summaries",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('body is an array', () => pm.expect(pm.response.json()).to.be.an('array'));", "pm.test('summary contains calculated cost', () => { const body = pm.response.json(); if (body.length) pm.expect(body[0]).to.have.property('totalCost'); });"] } }]
+    },
+    {
+      "name": "Order details",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('body is an array', () => pm.expect(pm.response.json()).to.be.an('array'));", "pm.test('line contains calculated position cost', () => { const body = pm.response.json(); if (body.length) pm.expect(body[0]).to.have.property('totalPositionCost'); });"] } }]
+    },
+    {
+      "name": "Calculate order cost",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}/cost" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('returns calculated cost', () => pm.expect(pm.response.json()).to.have.property('totalCost'));"] } }]
+    },
+    {
+      "name": "Unknown order returns 404",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/2147483647" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('unknown order returns 404, not 500', () => pm.response.to.have.status(404));", "pm.test('response explains the missing order', () => pm.expect(pm.response.json().error).to.eql('Заказ не найден')); "] } }]
+    },
+    {
+      "name": "Client order analysis",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/analysis" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('body is an array', () => pm.expect(pm.response.json()).to.be.an('array'));", "pm.test('analysis has a discount percentage', () => { const body = pm.response.json(); if (body.length) pm.expect(body[0]).to.have.property('discountPercent'); });"] } }]
+    },
+    {
+      "name": "Analysis filtered by customer",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/analysis?customerId={{customerId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('returns 200', () => pm.response.to.have.status(200));", "pm.test('all returned rows belong to selected client', () => pm.response.json().forEach(row => pm.expect(row.clientId).to.eql(Number(pm.variables.get('customerId'))))); "] } }]
+    }
+  ]
+}

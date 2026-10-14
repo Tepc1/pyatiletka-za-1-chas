@@ -1,0 +1,16 @@
+﻿@baseUrl = http://localhost:5117
+
+### Customer directory (Windows Negotiate authentication)
+GET {{baseUrl}}/api/customers
+
+### Calculated order summaries
+GET {{baseUrl}}/api/orders
+
+### Order detail (set an existing order ID)
+GET {{baseUrl}}/api/orders/1
+
+### Client analysis (all clients)
+GET {{baseUrl}}/api/analysis
+
+### Client analysis (filter)
+GET {{baseUrl}}/api/analysis?customerId=1

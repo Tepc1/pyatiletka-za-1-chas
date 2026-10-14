@@ -1,0 +1,8 @@
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.csproj.AssemblyReference.cache
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\rpswa.dswa.cache.json
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.GeneratedMSBuildEditorConfig.editorconfig
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.AssemblyInfoInputs.cache
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.AssemblyInfo.cs
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.csproj.CoreCompileInputs.cache
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.MvcApplicationPartsAssemblyInfo.cache
+E:\Работа\4 курс\###УП 06\!Готовые работы\rabota\!Готовые работы\Проекты\AutoCenterPlusAPI\AutoCenterPlus\AutoCenterPlus\obj\Debug\net9.0\AutoCenterPlus.sourcelink.json

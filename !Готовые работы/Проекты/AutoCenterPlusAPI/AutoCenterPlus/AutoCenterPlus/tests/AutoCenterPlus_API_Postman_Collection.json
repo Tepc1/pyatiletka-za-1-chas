@@ -1,0 +1,352 @@
+{
+    "info":  {
+                 "name":  "AutoCenterPlus API",
+                 "description":  "Тестирование базы автосервиса",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "https://localhost:7117"
+                     },
+                     {
+                         "key":  "apiLogin",
+                         "value":  "admin"
+                     },
+                     {
+                         "key":  "apiPassword",
+                         "value":  "Admin123"
+                     },
+                     {
+                         "key":  "orderId",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "customerId",
+                         "value":  "1"
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "Log in",
+                     "request":  {
+                                     "method":  "POST",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\"login\":\"{{apiLogin}}\",\"password\":\"{{apiPassword}}\"}"
+                                              },
+                                     "url":  "{{baseUrl}}/api/auth/login"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027returns authenticated identity without credentials\u0027, () =\u003e body \u0026\u0026 body.role \u0026\u0026 !Object.prototype.hasOwnProperty.call(body, \u0027password\u0027));",
+                                                                   "const setCookie = rf.response.getHeader(\u0027Set-Cookie\u0027) || \u0027\u0027;",
+                                                                   "const sessionCookie = setCookie.match(/\\.AutoCenterPlus\\.Session=[^;]+/);",
+                                                                   "if (!sessionCookie) throw new Error(\u0027API не вернул cookie-сессию Set-Cookie.\u0027);",
+                                                                   "rf.setEnvVar(\u0027sessionCookie\u0027, sessionCookie[0]);"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Customers",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/customers"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027body is an array\u0027, () =\u003e Array.isArray(body));",
+                                                                   "test(\u0027customer has required fields\u0027, () =\u003e Array.isArray(body) \u0026\u0026 (!body.length || Object.prototype.hasOwnProperty.call(body[0], \u0027name\u0027)));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Create test customer",
+                     "request":  {
+                                     "method":  "POST",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    },
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\"name\":\"API smoke test {{$guid}}\",\"inn\":null,\"address\":null,\"phone\":null,\"isBuyer\":true,\"isSalesman\":false}"
+                                              },
+                                     "url":  "{{baseUrl}}/api/customers"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027creates a customer\u0027, () =\u003e rf.response.getStatusCode() === 201);",
+                                                                   "if (body \u0026\u0026 body.id) rf.setEnvVar(\u0027testCustomerId\u0027, body.id);"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Update test customer",
+                     "request":  {
+                                     "method":  "PUT",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    },
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "body":  {
+                                                  "mode":  "raw",
+                                                  "raw":  "{\"name\":\"Updated API smoke test\",\"inn\":null,\"address\":null,\"phone\":null,\"isBuyer\":true,\"isSalesman\":false}"
+                                              },
+                                     "url":  "{{baseUrl}}/api/customers/{{testCustomerId}}"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "test(\u0027updates the customer\u0027, () =\u003e rf.response.getStatusCode() === 204);"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Delete test customer",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/customers/{{testCustomerId}}"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "test(\u0027deletes the customer\u0027, () =\u003e rf.response.getStatusCode() === 204);"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Order summaries",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/orders"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027body is an array\u0027, () =\u003e Array.isArray(body));",
+                                                                   "test(\u0027summary contains calculated cost\u0027, () =\u003e Array.isArray(body) \u0026\u0026 (!body.length || Object.prototype.hasOwnProperty.call(body[0], \u0027totalCost\u0027)));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Order details",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/orders/{{orderId}}"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027body is an array\u0027, () =\u003e Array.isArray(body));",
+                                                                   "test(\u0027line contains calculated position cost\u0027, () =\u003e Array.isArray(body) \u0026\u0026 (!body.length || Object.prototype.hasOwnProperty.call(body[0], \u0027totalPositionCost\u0027)));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Calculate order cost",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/orders/{{orderId}}/cost"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027returns calculated cost\u0027, () =\u003e body \u0026\u0026 Object.prototype.hasOwnProperty.call(body, \u0027totalCost\u0027));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Unknown order returns 404",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/orders/2147483647"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027unknown order returns 404, not 500\u0027, () =\u003e rf.response.getStatusCode() === 404);",
+                                                                   "test(\u0027response explains the missing order\u0027, () =\u003e body \u0026\u0026 body.error === \u0027Заказ не найден\u0027);"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Client order analysis",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/analysis"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027body is an array\u0027, () =\u003e Array.isArray(body));",
+                                                                   "test(\u0027analysis has a discount percentage\u0027, () =\u003e Array.isArray(body) \u0026\u0026 (!body.length || Object.prototype.hasOwnProperty.call(body[0], \u0027discountPercent\u0027)));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 },
+                 {
+                     "name":  "Analysis filtered by customer",
+                     "request":  {
+                                     "method":  "GET",
+                                     "header":  [
+                                                    {
+                                                        "key":  "Cookie",
+                                                        "value":  "{{sessionCookie}}",
+                                                        "type":  "text"
+                                                    }
+                                                ],
+                                     "url":  "{{baseUrl}}/api/analysis?customerId={{customerId}}"
+                                 },
+                     "event":  [
+                                   {
+                                       "listen":  "test",
+                                       "script":  {
+                                                      "type":  "text/javascript",
+                                                      "exec":  [
+                                                                   "const body = rf.response.getBodyJSON();",
+                                                                   "const customerId = Number(new URL(rf.request.getURL()).searchParams.get(\u0027customerId\u0027));",
+                                                                   "test(\u0027returns 200\u0027, () =\u003e rf.response.getStatusCode() === 200);",
+                                                                   "test(\u0027all returned rows belong to selected client\u0027, () =\u003e Array.isArray(body) \u0026\u0026 body.every(row =\u003e row.clientId === customerId));"
+                                                               ]
+                                                  }
+                                   }
+                               ]
+                 }
+             ]
+}
