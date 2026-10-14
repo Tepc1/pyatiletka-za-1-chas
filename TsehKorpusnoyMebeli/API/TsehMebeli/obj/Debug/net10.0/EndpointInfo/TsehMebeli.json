@@ -1,17 +1,13 @@
 {
-  "openapi": "3.1.1",
+  "openapi": "3.0.1",
   "info": {
-    "title": "TsehMebeli | v1",
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "https://localhost:7150"
+    "title": "Цех корпусной мебели API",
+    "description": "Web API информационной системы «Цех корпусной мебели» (УП06, вариант 11).\nАутентификация: cookie-сессия после POST /api/auth/login.",
+    "contact": {
+      "name": "TsehMebeli"
     },
-    {
-      "url": "http://localhost:5150"
-    }
-  ],
+    "version": "v1"
+  },
   "paths": {
     "/api/analysis": {
       "get": {
@@ -23,11 +19,7 @@
             "name": "customerId",
             "in": "query",
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
+              "type": "integer",
               "format": "int32"
             }
           }
@@ -87,8 +79,7 @@
                 "$ref": "#/components/schemas/LoginRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -184,8 +175,7 @@
                 "$ref": "#/components/schemas/CustomerRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -222,7 +212,6 @@
             "in": "path",
             "required": true,
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": "integer",
               "format": "int32"
             }
@@ -245,8 +234,7 @@
                 "$ref": "#/components/schemas/CustomerRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -264,7 +252,6 @@
             "in": "path",
             "required": true,
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": "integer",
               "format": "int32"
             }
@@ -288,7 +275,6 @@
             "in": "path",
             "required": true,
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": "integer",
               "format": "int32"
             }
@@ -367,7 +353,6 @@
             "in": "path",
             "required": true,
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": "integer",
               "format": "int32"
             }
@@ -410,166 +395,103 @@
   "components": {
     "schemas": {
       "AuthenticatedUserDto": {
-        "required": [
-          "id",
-          "login",
-          "fullName",
-          "role"
-        ],
         "type": "object",
         "properties": {
           "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "login": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fullName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "role": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       },
       "ClientOrderAnalysisDto": {
-        "required": [
-          "clientId",
-          "clientName",
-          "productName",
-          "productCode",
-          "quantity",
-          "unit",
-          "price",
-          "discount",
-          "totalSum",
-          "discountPercent",
-          "orderId"
-        ],
         "type": "object",
         "properties": {
           "clientId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "clientName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "productName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "productCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "quantity": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "unit": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "price": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "discount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "totalSum": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "discountPercent": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "orderId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "CustomerDto": {
-        "required": [
-          "id",
-          "code",
-          "name",
-          "inn",
-          "address",
-          "phone",
-          "isBuyer",
-          "isSalesman"
-        ],
         "type": "object",
         "properties": {
           "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "code": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inn": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "address": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "phone": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "isBuyer": {
             "type": "boolean"
@@ -577,39 +499,27 @@
           "isSalesman": {
             "type": "boolean"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "CustomerRequest": {
-        "required": [
-          "name",
-          "inn",
-          "address",
-          "phone",
-          "isBuyer",
-          "isSalesman"
-        ],
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inn": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "address": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "phone": {
-            "type": [
-              "null",
-              "string"
-            ]
+            "type": "string",
+            "nullable": true
           },
           "isBuyer": {
             "type": "boolean"
@@ -617,160 +527,114 @@
           "isSalesman": {
             "type": "boolean"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "LoginRequest": {
-        "required": [
-          "login",
-          "password"
-        ],
         "type": "object",
         "properties": {
           "login": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       },
       "OrderCostDto": {
-        "required": [
-          "orderId",
-          "totalCost"
-        ],
         "type": "object",
         "properties": {
           "orderId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "totalCost": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "OrderLineDto": {
-        "required": [
-          "orderId",
-          "customerName",
-          "orderDate",
-          "productCode",
-          "productName",
-          "quantity",
-          "unit",
-          "unitCost",
-          "totalPositionCost"
-        ],
         "type": "object",
         "properties": {
           "orderId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orderDate": {
             "type": "string",
             "format": "date-time"
           },
           "productCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "productName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "quantity": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "unit": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "unitCost": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           },
           "totalPositionCost": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "OrderSummaryDto": {
-        "required": [
-          "orderId",
-          "customerName",
-          "orderDate",
-          "totalCost"
-        ],
         "type": "object",
         "properties": {
           "orderId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
+            "type": "integer",
             "format": "int32"
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orderDate": {
             "type": "string",
             "format": "date-time"
           },
           "totalCost": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "type": [
-              "number",
-              "string"
-            ],
+            "type": "number",
             "format": "double"
           }
-        }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "CookieAuth": {
+        "type": "apiKey",
+        "description": "Cookie-сессия после успешного входа (POST /api/auth/login).",
+        "name": ".TsehMebeli.Session",
+        "in": "cookie"
       }
     }
   },
-  "tags": [
+  "security": [
     {
-      "name": "Analysis"
-    },
-    {
-      "name": "Auth"
-    },
-    {
-      "name": "Customers"
-    },
-    {
-      "name": "Orders"
+      "CookieAuth": [ ]
     }
   ]
 }

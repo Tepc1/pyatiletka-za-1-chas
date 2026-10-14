@@ -6,11 +6,8 @@ d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\Tse
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\TsehMebeli.runtimeconfig.json
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\TsehMebeli.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\TsehMebeli.pdb
-d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Bcl.Cryptography.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Data.SqlClient.dll
-d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Data.SqlClient.Extensions.Abstractions.dll
-d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Data.SqlClient.Internal.Logging.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
@@ -65,3 +62,15 @@ d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\Tse
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\obj\Debug\net10.0\TsehMebeli.pdb
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\obj\Debug\net10.0\TsehMebeli.genruntimeconfig.cache
 d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\obj\Debug\net10.0\ref\TsehMebeli.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\TsehMebeli.xml
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Azure.Core.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Azure.Identity.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Identity.Client.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Microsoft.Identity.Client.Extensions.Msal.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\System.ClientModel.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\bin\Debug\net10.0\System.Memory.Data.dll
+d:\Desktop\pyatiletka za 1 chas\pyatiletka-za-1-chas\TsehKorpusnoyMebeli\API\TsehMebeli\obj\Debug\net10.0\TsehMebeli.xml
