@@ -2,48 +2,34 @@
 
 Информационная система **Цех корпусной мебели**.
 
-## Состав
+## Visual Studio 2026
 
-| Папка | Описание |
-|-------|----------|
-| `SQL/` | Скрипты БД `TsehMebeliDB` |
-| `API/` | ASP.NET Core Web API + Swagger (Visual Studio 2026 / .NET 10) |
-| `Client/` | WinForms-клиент (.NET Framework 4.7.2) |
-| `Passwords.txt` | Учебные учётные записи |
+Откройте единый solution:
 
-## SQL — порядок выполнения
+```
+TsehKorpusnoyMebeli/TsehKorpusnoyMebeli.sln
+```
 
-1. `SQL/TsehMebeliDB.sql` — создание БД и таблиц
-2. `SQL/TsehMebeliDB_seed.sql` — клиенты, продукты, материалы, операции
-3. `SQL/TsehMebeliDB_seed2.sql` — спецификации, пользователи
-4. `SQL/TsehMebeliDB_seed3.sql` — заказы, представления, процедуры
+В solution два проекта:
 
-## API (Visual Studio 2026)
+| Проект | Платформа | Описание |
+|--------|-----------|----------|
+| **TsehMebeli.Api** | .NET 10 | ASP.NET Core Web API + Swagger |
+| **TsehMebeli.Client** | .NET 10 Windows | WinForms-клиент |
 
-1. Откройте solution: `API/TsehMebeli.sln`
-2. В `API/TsehMebeli/appsettings.json` укажите свой `Data Source` (SQL Server)
-3. Запустите профиль **https** (F5) — браузер откроет **Swagger UI**:  
-   https://localhost:7150/swagger
-4. Либо из терминала:
-   ```bash
-   dotnet restore API/TsehMebeli/TsehMebeli.csproj
-   dotnet run --project API/TsehMebeli/TsehMebeli.csproj
-   ```
+1. Установите startup project: **TsehMebeli.Api** (или запускайте оба).
+2. В `API/TsehMebeli/appsettings.json` — строка к `209-U\SQLEXPRESS01` (sa / 0000).
+3. F5 по API → https://localhost:7150/swagger
+4. Запустите **TsehMebeli.Client** (правой кнопкой → Debug).
 
-### Endpoints
+## SQL
 
-| Метод | Путь | Роли |
-|-------|------|------|
-| POST | `/api/auth/login` | anonymous |
-| POST | `/api/auth/logout` | authenticated |
-| GET/POST/PUT/DELETE | `/api/customers` | Admin, Manager |
-| GET | `/api/orders`, `/api/orders/{id}`, `/api/orders/{id}/cost` | Admin, Manager, Operator |
-| GET | `/api/analysis` | Admin, Manager |
+По порядку:
 
-## Клиент
-
-1. В `Client/TsehMebeli/App.config` проверьте `ApiBaseUrl` (`https://localhost:7150/`)
-2. Откройте `Client/TsehMebeli/TsehMebeli.csproj` в Visual Studio и запустите
+1. `SQL/TsehMebeliDB.sql`
+2. `SQL/TsehMebeliDB_seed.sql`
+3. `SQL/TsehMebeliDB_seed2.sql`
+4. `SQL/TsehMebeliDB_seed3.sql`
 
 ## Учётные записи
 
@@ -52,3 +38,10 @@
 | admin | Admin123 | Admin |
 | manager | Manager123 | Manager |
 | operator | Operator123 | Operator |
+
+## Клиент: навигация
+
+- **◀ / ▶** — назад / вперёд по истории экранов
+- **⌂** — главное меню
+- Боковое меню: Клиенты, Заказы, Расчёт, Анализ
+- **Выход** — завершение сессии API
