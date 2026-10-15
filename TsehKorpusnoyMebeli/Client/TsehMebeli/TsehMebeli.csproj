@@ -8,7 +8,6 @@
     <RootNamespace>TsehMebeli</RootNamespace>
     <AssemblyName>TsehMebeli</AssemblyName>
     <StartupObject>TsehMebeli.Program</StartupObject>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyTitle>TsehMebeli</AssemblyTitle>
     <Product>TsehMebeli</Product>
