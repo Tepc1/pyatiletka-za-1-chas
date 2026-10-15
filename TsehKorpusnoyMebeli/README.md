@@ -17,12 +17,12 @@ TsehKorpusnoyMebeli/TsehMebeli.slnx
 
 ## SQL Server
 
-**Сервер:** `HOME-PC`  
+**Сервер:** `HOME-PC\SQLEXPRESS`  
 **БД:** `TsehMebeliDB`  
-**Авторизация:** Windows (Integrated Security), без логина/пароля
+**Авторизация:** Windows (Integrated Security)
 
 ```
-Data Source=HOME-PC;
+Data Source=HOME-PC\SQLEXPRESS;
 Initial Catalog=TsehMebeliDB;
 Integrated Security=True;
 Encrypt=True; TrustServerCertificate=True;
@@ -30,8 +30,6 @@ Encrypt=True; TrustServerCertificate=True;
 
 - API: `API/TsehMebeli/appsettings.json`
 - Client: `Client/TsehMebeli/App.config` + `SqlConnectionFactory`
-
-Учётная запись Windows, под которой запущены API и Client, должна иметь доступ к SQL Server и к БД `TsehMebeliDB`.
 
 ## SQL-скрипты
 
