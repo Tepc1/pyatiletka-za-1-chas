@@ -25,7 +25,8 @@
         "runtime": {
           "lib/net6.0/Azure.Core.dll": {
             "assemblyVersion": "1.38.0.0",
-            "fileVersion": "1.3800.24.12602"
+            "fileVersion": "1.3800.24.12602",
+            "localPath": "Azure.Core.dll"
           }
         }
       },
@@ -39,7 +40,8 @@
         "runtime": {
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.11.4.0",
-            "fileVersion": "1.1100.424.31005"
+            "fileVersion": "1.1100.424.31005",
+            "localPath": "Azure.Identity.dll"
           }
         }
       },
@@ -47,7 +49,8 @@
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "4.700.20.21406"
+            "fileVersion": "4.700.20.21406",
+            "localPath": "Microsoft.Bcl.AsyncInterfaces.dll"
           }
         }
       },
@@ -55,7 +58,8 @@
         "runtime": {
           "lib/net9.0/Microsoft.Bcl.Cryptography.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
+            "fileVersion": "9.0.24.52809",
+            "localPath": "Microsoft.Bcl.Cryptography.dll"
           }
         }
       },
@@ -72,48 +76,62 @@
         "runtime": {
           "lib/net9.0/Microsoft.Data.SqlClient.dll": {
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.1.25023.1"
+            "fileVersion": "6.1.25023.1",
+            "localPath": "Microsoft.Data.SqlClient.dll"
           }
         },
         "resources": {
           "lib/net9.0/cs/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "cs"
+            "locale": "cs",
+            "localPath": "cs/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/de/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "de"
+            "locale": "de",
+            "localPath": "de/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/es/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "es"
+            "locale": "es",
+            "localPath": "es/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/fr/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "fr"
+            "locale": "fr",
+            "localPath": "fr/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/it/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "it"
+            "locale": "it",
+            "localPath": "it/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/ja/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "ja"
+            "locale": "ja",
+            "localPath": "ja/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/ko/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "ko"
+            "locale": "ko",
+            "localPath": "ko/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/pl/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "pl"
+            "locale": "pl",
+            "localPath": "pl/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/pt-BR/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "pt-BR"
+            "locale": "pt-BR",
+            "localPath": "pt-BR/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/ru/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "ru"
+            "locale": "ru",
+            "localPath": "ru/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/tr/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "tr"
+            "locale": "tr",
+            "localPath": "tr/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/zh-Hans/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "zh-Hans"
+            "locale": "zh-Hans",
+            "localPath": "zh-Hans/Microsoft.Data.SqlClient.resources.dll"
           },
           "lib/net9.0/zh-Hant/Microsoft.Data.SqlClient.resources.dll": {
-            "locale": "zh-Hant"
+            "locale": "zh-Hant",
+            "localPath": "zh-Hant/Microsoft.Data.SqlClient.resources.dll"
           }
         },
         "runtimeTargets": {
@@ -121,13 +139,15 @@
             "rid": "unix",
             "assetType": "runtime",
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.1.25023.1"
+            "fileVersion": "6.1.25023.1",
+            "localPath": "runtimes/unix/lib/net9.0/Microsoft.Data.SqlClient.dll"
           },
           "runtimes/win/lib/net9.0/Microsoft.Data.SqlClient.dll": {
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.1.25023.1"
+            "fileVersion": "6.1.25023.1",
+            "localPath": "runtimes/win/lib/net9.0/Microsoft.Data.SqlClient.dll"
           }
         }
       },
@@ -136,17 +156,20 @@
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "6.2.0.0"
+            "fileVersion": "6.2.0.0",
+            "localPath": "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "6.2.0.0"
+            "fileVersion": "6.2.0.0",
+            "localPath": "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "6.2.0.0"
+            "fileVersion": "6.2.0.0",
+            "localPath": "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll"
           }
         }
       },
@@ -157,7 +180,8 @@
         "runtime": {
           "lib/net6.0/Microsoft.Identity.Client.dll": {
             "assemblyVersion": "4.61.3.0",
-            "fileVersion": "4.61.3.0"
+            "fileVersion": "4.61.3.0",
+            "localPath": "Microsoft.Identity.Client.dll"
           }
         }
       },
@@ -169,7 +193,8 @@
         "runtime": {
           "lib/net6.0/Microsoft.Identity.Client.Extensions.Msal.dll": {
             "assemblyVersion": "4.61.3.0",
-            "fileVersion": "4.61.3.0"
+            "fileVersion": "4.61.3.0",
+            "localPath": "Microsoft.Identity.Client.Extensions.Msal.dll"
           }
         }
       },
@@ -177,7 +202,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Abstractions.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.Abstractions.dll"
           }
         }
       },
@@ -188,7 +214,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.JsonWebTokens.dll"
           }
         }
       },
@@ -199,7 +226,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Logging.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.Logging.dll"
           }
         }
       },
@@ -210,7 +238,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Protocols.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.Protocols.dll"
           }
         }
       },
@@ -222,7 +251,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.Protocols.OpenIdConnect.dll"
           }
         }
       },
@@ -233,7 +263,8 @@
         "runtime": {
           "lib/net8.0/Microsoft.IdentityModel.Tokens.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "Microsoft.IdentityModel.Tokens.dll"
           }
         }
       },
@@ -241,7 +272,8 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "1.6.22.0",
-            "fileVersion": "1.6.22.0"
+            "fileVersion": "1.6.22.0",
+            "localPath": "Microsoft.OpenApi.dll"
           }
         }
       },
@@ -249,7 +281,8 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.SqlServer.Server.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "fileVersion": "1.0.0.0",
+            "localPath": "Microsoft.SqlServer.Server.dll"
           }
         }
       },
@@ -267,7 +300,8 @@
         "runtime": {
           "lib/net8.0/Swashbuckle.AspNetCore.Swagger.dll": {
             "assemblyVersion": "6.9.0.0",
-            "fileVersion": "6.9.0.799"
+            "fileVersion": "6.9.0.799",
+            "localPath": "Swashbuckle.AspNetCore.Swagger.dll"
           }
         }
       },
@@ -278,7 +312,8 @@
         "runtime": {
           "lib/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
             "assemblyVersion": "6.9.0.0",
-            "fileVersion": "6.9.0.799"
+            "fileVersion": "6.9.0.799",
+            "localPath": "Swashbuckle.AspNetCore.SwaggerGen.dll"
           }
         }
       },
@@ -286,7 +321,8 @@
         "runtime": {
           "lib/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {
             "assemblyVersion": "6.9.0.0",
-            "fileVersion": "6.9.0.799"
+            "fileVersion": "6.9.0.799",
+            "localPath": "Swashbuckle.AspNetCore.SwaggerUI.dll"
           }
         }
       },
@@ -297,7 +333,8 @@
         "runtime": {
           "lib/net6.0/System.ClientModel.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.24.5302"
+            "fileVersion": "1.0.24.5302",
+            "localPath": "System.ClientModel.dll"
           }
         }
       },
@@ -308,7 +345,8 @@
         "runtime": {
           "lib/net9.0/System.Configuration.ConfigurationManager.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
+            "fileVersion": "9.0.24.52809",
+            "localPath": "System.Configuration.ConfigurationManager.dll"
           }
         }
       },
@@ -320,7 +358,8 @@
         "runtime": {
           "lib/net8.0/System.IdentityModel.Tokens.Jwt.dll": {
             "assemblyVersion": "7.5.0.0",
-            "fileVersion": "7.5.0.50326"
+            "fileVersion": "7.5.0.50326",
+            "localPath": "System.IdentityModel.Tokens.Jwt.dll"
           }
         }
       },
@@ -328,7 +367,8 @@
         "runtime": {
           "lib/netstandard2.0/System.Memory.Data.dll": {
             "assemblyVersion": "1.0.2.0",
-            "fileVersion": "1.0.221.20802"
+            "fileVersion": "1.0.221.20802",
+            "localPath": "System.Memory.Data.dll"
           }
         }
       },
@@ -336,7 +376,8 @@
         "runtime": {
           "lib/net9.0/System.Security.Cryptography.ProtectedData.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.52809"
+            "fileVersion": "9.0.24.52809",
+            "localPath": "System.Security.Cryptography.ProtectedData.dll"
           }
         }
       }
