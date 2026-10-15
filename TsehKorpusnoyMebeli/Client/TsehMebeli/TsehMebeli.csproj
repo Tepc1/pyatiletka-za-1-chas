@@ -8,6 +8,12 @@
     <RootNamespace>TsehMebeli</RootNamespace>
     <AssemblyName>TsehMebeli</AssemblyName>
     <StartupObject>TsehMebeli.Program</StartupObject>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AssemblyTitle>TsehMebeli</AssemblyTitle>
+    <Product>TsehMebeli</Product>
+    <Description>Клиент ИС Цех корпусной мебели</Description>
+    <Version>1.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
