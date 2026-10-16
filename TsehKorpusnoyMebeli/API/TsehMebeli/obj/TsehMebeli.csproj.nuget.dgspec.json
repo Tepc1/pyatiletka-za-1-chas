@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {}
+    "F:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {}
   },
   "projects": {
-    "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {
+    "F:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
+        "projectUniqueName": "F:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
         "projectName": "TsehMebeli",
-        "projectPath": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
-        "packagesPath": "C:\\Users\\charka\\.nuget\\packages\\",
-        "outputPath": "G:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\obj\\",
+        "projectPath": "F:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\TsehMebeli.csproj",
+        "packagesPath": "C:\\Users\\student\\.nuget\\packages\\",
+        "outputPath": "F:\\pyatiletka za 1 chas\\pyatiletka-za-1-chas\\TsehKorpusnoyMebeli\\API\\TsehMebeli\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\charka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\student\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -46,7 +46,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "11.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\11.0.100-rc.2.26504.105/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
